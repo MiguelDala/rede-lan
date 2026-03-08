@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Rede LAN - Escola Fundão</title>
+    <base href="./">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">Projeto de Rede LAN</h1>
+            <p class="subtitle">Rede Local da Escola Fundão - Cisco Packet Tracer</p>
+            <nav class="header-nav">
+                <a href="#cadastro" class="nav-link">Cadastro</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="capa" aria-label="Capa - Topologia da Rede LAN">
+            <img src="assets/images/capa.png" alt="Topologia da Rede LAN - Cisco Packet Tracer: servidores FTP, WEBB, EMAIL, DHCP, DNS, switches, Access Points ALUNOS, CONVIDADOS, PROFESSORES e dispositivos móveis" class="capa-imagem">
+        </section>
+        <section class="intro">
+            <h2>Sobre o Projeto</h2>
+            <p>Este projeto apresenta uma rede LAN completa simulada no Cisco Packet Tracer, com <strong>5 servidores em funcionamento</strong> (DHCP, DNS, Web, FTP, Email) e <strong>ligações wireless</strong> aos dispositivos móveis.</p>
+        </section>
+
+        <!-- SECÇÃO: SERVIDORES EM FUNCIONAMENTO -->
+        <section class="seccao-servidores" id="servidores">
+            <h2 class="seccao-titulo">
+                <span class="icone">🖥️</span>
+                Servidores em Funcionamento
+            </h2>
+            
+            <div class="servidores-grid">
+                <!-- DHCP -->
+                <div class="servidor-grupo" data-servidor="dhcp">
+                    <h3 class="servidor-nome">
+                        <span class="badge-funcionar">● A Funcionar</span>
+                        DHCP
+                    </h3>
+                    <p class="servidor-desc">Atribuição automática de endereços IP aos dispositivos da rede.</p>
+                    <div class="carrossel-wrapper">
+                        <button class="carrossel-btn carrossel-prev" aria-label="Anterior">‹</button>
+                        <div class="carrossel" id="cardsDHCP"></div>
+                        <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
+                    </div>
+                </div>
+
+                <!-- DNS -->
+                <div class="servidor-grupo" data-servidor="dns">
+                    <h3 class="servidor-nome">
+                        <span class="badge-funcionar">● A Funcionar</span>
+                        DNS
+                    </h3>
+                    <p class="servidor-desc">Resolução de nomes de domínio (ex: WEBB → 192.168.3.x).</p>
+                    <div class="carrossel-wrapper">
+                        <button class="carrossel-btn carrossel-prev" aria-label="Anterior">‹</button>
+                        <div class="carrossel" id="cardsDNS"></div>
+                        <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
+                    </div>
+                </div>
+
+                <!-- Web -->
+                <div class="servidor-grupo" data-servidor="web">
+                    <h3 class="servidor-nome">
+                        <span class="badge-funcionar">● A Funcionar</span>
+                        Web
+                    </h3>
+                    <p class="servidor-desc">Servidor HTTP que aloja páginas HTML acessíveis via browser.</p>
+                    <div class="carrossel-wrapper">
+                        <button class="carrossel-btn carrossel-prev" aria-label="Anterior">‹</button>
+                        <div class="carrossel" id="cardsWeb"></div>
+                        <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="servidor-grupo" data-servidor="email">
+                    <h3 class="servidor-nome">
+                        <span class="badge-funcionar">● A Funcionar</span>
+                        Email
+                    </h3>
+                    <p class="servidor-desc">Serviço de correio com SMTP e POP3, domínio escolafundao.pt.</p>
+                    <div class="carrossel-wrapper">
+                        <button class="carrossel-btn carrossel-prev" aria-label="Anterior">‹</button>
+                        <div class="carrossel" id="cardsEmail"></div>
+                        <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
+                    </div>
+                </div>
+
+                <!-- FTP -->
+                <div class="servidor-grupo" data-servidor="ftp">
+                    <h3 class="servidor-nome">
+                        <span class="badge-funcionar">● A Funcionar</span>
+                        FTP
+                    </h3>
+                    <p class="servidor-desc">Transferência de ficheiros com utilizadores e permissões configurados.</p>
+                    <div class="carrossel-wrapper">
+                        <button class="carrossel-btn carrossel-prev" aria-label="Anterior">‹</button>
+                        <div class="carrossel" id="cardsFTP"></div>
+                        <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
+                    </div>
+                </div>
+
+                <!-- Testes de Conectividade -->
+                <div class="servidor-grupo" data-servidor="conectividade">
+                    <h3 class="servidor-nome">
+                        <span class="badge-funcionar">● A Funcionar</span>
+                        Testes de Conectividade
+                    </h3>
+                    <p class="servidor-desc">Ping entre PCs e laptop da rede para verificar conectividade.</p>
+                    <div class="carrossel-wrapper">
+                        <button class="carrossel-btn carrossel-prev" aria-label="Anterior">‹</button>
+                        <div class="carrossel" id="cardsConectividade"></div>
+                        <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECÇÃO: LIGAÇÕES WIRELESS -->
+        <section class="seccao-wireless" id="wireless">
+            <h2 class="seccao-titulo">
+                <span class="icone">📶</span>
+                Ligações Wireless e Dispositivos
+            </h2>
+            <p class="seccao-intro">Access Points (ALUNOS, CONVIDADOS, PROFESSORES) com dispositivos móveis ligados via Wi-Fi.</p>
+            <div class="carrossel-wrapper carrossel-grande">
+                <button class="carrossel-btn carrossel-prev" aria-label="Anterior">‹</button>
+                <div class="carrossel" id="cardsWireless"></div>
+                <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
+            </div>
+        </section>
+
+        <!-- SECÇÃO: TOPOLOGIA -->
+        <section class="seccao-topologia" id="topologia">
+            <h2 class="seccao-titulo">
+                <span class="icone">🔗</span>
+                Topologia da Rede
+            </h2>
+            <div class="carrossel-wrapper carrossel-grande">
+                <button class="carrossel-btn carrossel-prev" aria-label="Anterior">‹</button>
+                <div class="carrossel" id="cardsTopologia"></div>
+                <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
+            </div>
+        </section>
+
+        <!-- SECÇÃO: CADASTRO DE UTILIZADORES (API SQLite + fallback localStorage) -->
+        <section class="seccao-cadastro" id="cadastro">
+            <h2 class="seccao-titulo">
+                <span class="icone">👥</span>
+                Cadastro de Utilizadores
+                <span class="badge-db" id="badgeDb">...</span>
+            </h2>
+            <p class="seccao-intro" id="introCadastro">Regista-te aqui. Os dados são guardados na base de dados do servidor (não visíveis no site).</p>
+            <div class="cadastro-panel">
+                <form id="formUtilizador" class="form-cadastro">
+                    <input type="hidden" id="userId" value="">
+                    <div class="form-row">
+                        <input type="text" id="inputNome" placeholder="Nome" required>
+                        <input type="email" id="inputEmail" placeholder="Email" required>
+                        <select id="inputRole" aria-label="Função">
+                            <option value="4">Convidado</option>
+                            <option value="1">Professor</option>
+                            <option value="2">Aluno</option>
+                            <option value="3">Administrador</option>
+                        </select>
+                        <input type="password" id="inputPassword" placeholder="Password (obrigatório ao registar)">
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" id="btnGuardar">Guardar</button>
+                        <button type="button" id="btnCancelar">Cancelar</button>
+                    </div>
+                    <div id="msgCadastro" class="msg-cadastro" role="alert" aria-live="polite"></div>
+                </form>
+                <p class="cadastro-aviso">Onde ver os dados guardados? Acede a <a href="/admin" target="_blank"><strong>/admin</strong></a> (com o servidor a correr) para ver todos os utilizadores na base de dados.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+            <img src="" alt="" id="modalImage">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Projeto de Rede LAN &copy; 2026 - Escola Fundão</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

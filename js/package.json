@@ -1,0 +1,13 @@
+{
+  "name": "projeto-rede-lan",
+  "version": "1.0.0",
+  "description": "Projeto de Rede LAN com SQLite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node js/server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "express": "^4.21.0"
+  }
+}

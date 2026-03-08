@@ -1,0 +1,4 @@
+{
+  "sqlfluff.dialect": "sqlite",
+  "sqltools.format.dialect": "sqlite"
+}
