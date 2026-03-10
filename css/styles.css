@@ -379,6 +379,21 @@ main {
   line-height: 1.6;
 }
 
+.card-pergunta {
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  background: rgba(6, 182, 212, 0.12);
+  border-radius: 8px;
+  border-left: 3px solid var(--cor-acento);
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+  line-height: 1.5;
+}
+
+.card-pergunta strong {
+  color: var(--cor-acento);
+}
+
 .badge-funcionar-card {
   position: absolute;
   top: 1rem;
@@ -398,6 +413,67 @@ main {
 .seccao-wireless,
 .seccao-topologia {
   margin-bottom: 3.5rem;
+}
+
+.respostas-titulo {
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
+  color: var(--cor-texto);
+  font-weight: 600;
+}
+
+.respostas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.card-resposta {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.7) 100%);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--cor-card-border);
+  position: relative;
+  transition: var(--transicao);
+}
+
+.card-resposta:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.15);
+}
+
+.card-resposta-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: rgba(6, 182, 212, 0.25);
+  color: var(--cor-acento);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.card-resposta-pergunta {
+  font-size: 0.95rem;
+  color: var(--cor-texto);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.card-resposta-resposta {
+  font-size: 1.1rem;
+  color: var(--cor-acento);
+  margin: 0;
+}
+
+.card-resposta-resposta strong {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
 }
 
 .carrossel-grande .card {
@@ -478,6 +554,12 @@ main {
   color: #4ade80;
 }
 
+.msg-cadastro.msg-erro {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+}
+
 .cadastro-aviso {
   margin-top: 1.25rem;
   font-size: 0.9rem;
@@ -507,6 +589,12 @@ main {
   color: #4ade80;
 }
 
+.msg-cadastro.msg-erro {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+}
+
 .cadastro-aviso {
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -534,6 +622,12 @@ main {
   background: rgba(34, 197, 94, 0.2);
   border: 1px solid rgba(34, 197, 94, 0.5);
   color: #4ade80;
+}
+
+.msg-cadastro.msg-erro {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
 }
 
 .cadastro-aviso {
@@ -626,6 +720,12 @@ main {
   overflow-x: auto;
   border-radius: 12px;
   border: 1px solid rgba(6, 182, 212, 0.15);
+}
+
+.tabela-utilizadores.cadastro-banco {
+  margin-top: 1.5rem;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.7) 100%);
+  border: 1px solid var(--cor-card-border);
 }
 
 .tabela-utilizadores .tabela-titulo {
@@ -778,6 +878,17 @@ main {
 .modal-info p {
   color: var(--cor-texto-suave);
   font-size: 0.95rem;
+}
+
+.modal-pergunta {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(6, 182, 212, 0.12);
+  border-radius: 10px;
+  border-left: 4px solid var(--cor-acento);
+  color: var(--cor-texto);
+  font-size: 0.95rem;
+  text-align: left;
 }
 
 @keyframes fadeIn {

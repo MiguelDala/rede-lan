@@ -5,18 +5,19 @@
 
 const cardsData = [
   { id: '01', titulo: 'Topologia com Access Points', descricao: 'Rede com servidores e pontos de acesso ALUNOS, CONVIDADOS e PROFESSORES ligados a dispositivos móveis.', imagem: 'assets/images/01.png', secao: 'wireless' },
-  { id: '02', titulo: 'Servidor DNS', descricao: 'Configuração IP estática: 192.168.3.1, máscara 255.255.255.0, gateway 192.168.3.2. Resolve nomes como WEBB.', imagem: 'assets/images/dns.png', secao: 'dns' },
+  { id: '02', titulo: 'Servidor DNS', descricao: 'Configuração IP estática: 192.168.3.1, máscara 255.255.255.0, gateway 192.168.3.2. Resolve nomes como WEBB.', pergunta: 'O que faz o servidor DNS? Converte nomes (ex: WEBB) em endereços IP (ex: 192.168.3.1).', imagem: 'assets/images/dns.png', secao: 'dns' },
   { id: '03', titulo: 'Servidor Email', descricao: 'Serviço de correio com SMTP e POP3, domínio escolafundao.pt.', imagem: 'assets/images/email.png', secao: 'email' },
-  { id: '05', titulo: 'Código do Servidor Web', descricao: 'Ficheiro index.html com HTML e CSS inline no servidor WEBB.', imagem: 'assets/images/05.png', secao: 'web' },
+  { id: '05', titulo: 'Código do Servidor Web', descricao: 'Ficheiro index.html com HTML e CSS inline no servidor WEBB.', pergunta: 'Qual a função do protocolo HTTP? E em que porta trabalha? Transfere páginas web entre servidor e navegador. Porta 80.', imagem: 'assets/images/05.png', secao: 'web' },
   { id: '04', titulo: 'Página Web no Navegador', descricao: 'Página HTML com CSS visualizada no PC0 em http://WEBB — servidor Web a funcionar.', imagem: 'assets/images/04.png', secao: 'web' },
   { id: '12', titulo: 'Teste Web — Página a Funcionar', descricao: 'PC0 a visualizar http://WEBB no browser. Página "Olá!" com CSS e botão Clica aqui — servidor Web testado e a funcionar.', imagem: 'assets/images/web-teste.png', secao: 'web' },
   { id: '13', titulo: 'Navegação Web na Rede LAN', descricao: 'Acesso ao servidor WEBB a partir de um PC cliente. HTTP a funcionar com resolução de nomes pelo DNS.', imagem: 'assets/images/04.png', secao: 'web' },
   { id: '14', titulo: 'Acesso Web via IP/Nome', descricao: 'PC0 a aceder ao servidor WEBB no browser (http://WEBB ou IP). Página "Olá!" com CSS — como procurei através do IP/nome na rede.', imagem: 'assets/images/web-acesso-ip.png', secao: 'web' },
-  { id: '06', titulo: 'Servidor FTP', descricao: 'Utilizadores admin, cisco, user com permissões de leitura, escrita e listagem.', imagem: 'assets/images/ftp.png', secao: 'ftp' },
+  { id: '15', titulo: 'Web Teste', descricao: 'Testei a web a partir do IP num computador e funcionou bem. PC0 a visualizar http://WEBB — página "Olá!" com CSS e botão Clica aqui.', imagem: 'assets/images/web-teste-computador.png', secao: 'web' },
+  { id: '16', titulo: 'Website Front-end via IP', descricao: 'Acesso ao site do meu trabalho front-end através do IP (http://WEBB) no Cisco Packet Tracer. Página "Olá!" com CSS e botão Clica aqui — servidor Web a funcionar na rede LAN.', imagem: 'assets/images/web-frontend-ip.png', secao: 'web' },
+  { id: '06', titulo: 'Servidor FTP', descricao: 'Utilizadores admin, cisco, user com permissões de leitura, escrita e listagem.', pergunta: 'Para que serve o servidor FTP? Transferir ficheiros entre computadores na rede. Porta 21.', imagem: 'assets/images/ftp.png', secao: 'ftp' },
   { id: '07', titulo: 'PC1 — Cliente com DNS', descricao: 'Configuração do PC1: IP 192.168.3.10, DNS 192.168.3.1 — utiliza o servidor DNS.', imagem: 'assets/images/07.png', secao: 'dns' },
   { id: '08', titulo: 'Access Point PROFESSORES', descricao: 'SSID PROFESSORES, canal 6, WPA2-PSK, AES. Dispositivos ligam-se via Wi-Fi.', imagem: 'assets/images/ap-professores.png', secao: 'wireless' },
-  { id: '09', titulo: 'Smartphone — DHCP a Funcionar', descricao: 'Smartphone0 ligado à rede PROFESSORES. IP 192.168.3.13 atribuído automaticamente pelo DHCP.', imagem: 'assets/images/dhcp.png', secao: 'dhcp' },
-  { id: '10', titulo: 'Topologia Completa', descricao: 'Switches 2960, servidores, PCs, laptop e dispositivos wireless na rede.', imagem: 'assets/images/10.png', secao: 'topologia' },
+  { id: '09', titulo: 'Smartphone — DHCP a Funcionar', descricao: 'Smartphone0 ligado à rede PROFESSORES. IP 192.168.3.13 atribuído automaticamente pelo DHCP.', pergunta: 'O que faz o servidor DHCP? Atribui endereços IP automaticamente aos dispositivos que se ligam à rede (ex: 192.168.3.1).', imagem: 'assets/images/dhcp.png', secao: 'dhcp' },
   { id: '11', titulo: 'Testes de Ping', descricao: 'PC-GERALDO a testar conectividade: ping 192.168.3.12 e 192.168.3.10 com 0% de perda de pacotes.', imagem: 'assets/images/ping.png', secao: 'conectividade' }
 ];
 
@@ -32,6 +33,7 @@ class GaleriaRedeLAN {
     this.renderizarPorSecao();
     this.configurarModal();
     this.configurarCarrossel();
+    this.configurarCapa();
   }
 
   configurarCarrossel() {
@@ -105,6 +107,8 @@ class GaleriaRedeLAN {
     const badge = ['dhcp','dns','web','ftp','email'].includes(card.secao) 
       ? '<span class="badge-funcionar-card">● A Funcionar</span>' : '';
     const imgSrc = card.imagem;
+    const perguntaHtml = card.pergunta 
+      ? `<div class="card-pergunta"><strong>💡 Pergunta:</strong> ${card.pergunta}</div>` : '';
     return `
       <article class="card" data-categoria="${card.secao}">
         ${badge}
@@ -112,6 +116,7 @@ class GaleriaRedeLAN {
         <div class="card-conteudo">
           <h3 class="card-titulo">${card.titulo}</h3>
           <p class="card-descricao">${card.descricao}</p>
+          ${perguntaHtml}
         </div>
       </article>
     `;
@@ -123,9 +128,21 @@ class GaleriaRedeLAN {
         const img = card.querySelector('img');
         const titulo = card.querySelector('.card-titulo')?.textContent || '';
         const descricao = card.querySelector('.card-descricao')?.textContent || '';
-        if (img) this.abrirModal(img.src, img.alt, titulo, descricao);
+        const perguntaEl = card.querySelector('.card-pergunta');
+        const pergunta = perguntaEl ? perguntaEl.textContent.replace(/^💡 Pergunta:\s*/, '').trim() : '';
+        if (img) this.abrirModal(img.src, img.alt, titulo, descricao, pergunta);
       });
     });
+  }
+
+  configurarCapa() {
+    const capaImg = document.querySelector('.capa-imagem');
+    if (capaImg) {
+      capaImg.style.cursor = 'pointer';
+      capaImg.addEventListener('click', () => {
+        this.abrirModal(capaImg.src, capaImg.alt, 'Topologia da Rede LAN', 'Vista ampliada da rede LAN no Cisco Packet Tracer.');
+      });
+    }
   }
 
   configurarModal() {
@@ -135,14 +152,19 @@ class GaleriaRedeLAN {
     document.addEventListener('keydown', e => { if (e.key === 'Escape') this.fecharModal(); });
   }
 
-  abrirModal(src, alt, titulo, descricao) {
+  abrirModal(src, alt, titulo, descricao, pergunta = '') {
     if (!this.modal) return;
     const img = this.modal.querySelector('#modalImage');
     const titleEl = this.modal.querySelector('#modalTitle');
     const descEl = this.modal.querySelector('#modalDescription');
+    const perguntaEl = this.modal.querySelector('#modalPergunta');
     if (img) { img.src = src; img.alt = alt; }
     if (titleEl) titleEl.textContent = titulo;
     if (descEl) descEl.textContent = descricao;
+    if (perguntaEl) {
+      perguntaEl.textContent = pergunta ? `💡 ${pergunta}` : '';
+      perguntaEl.style.display = pergunta ? 'block' : 'none';
+    }
     this.modal.classList.add('visivel');
     document.body.style.overflow = 'hidden';
   }
@@ -155,6 +177,16 @@ class GaleriaRedeLAN {
 
 /* ========== Cadastro de Utilizadores (API primeiro, localStorage fallback) ========== */
 const STORAGE_KEY = 'conf_red_lan_usuarios';
+
+async function obterIPUtilizador() {
+  try {
+    const r = await fetch('https://api.ipify.org?format=json');
+    const json = await r.json();
+    return json.ip || '';
+  } catch (e) {
+    return '';
+  }
+}
 const API_BASE = '';
 const ROLE_NAMES = { 1: 'Professor', 2: 'Aluno', 3: 'Administrador', 4: 'Convidado' };
 
@@ -197,7 +229,7 @@ function saveUsuariosLocal(data) {
 function renderTabela(dados, comFuncao = true) {
   const tbody = document.getElementById('tbodyUtilizadores');
   if (!tbody) return;
-  const cols = comFuncao ? 6 : 5;
+  const cols = 5;
   tbody.innerHTML = dados.length === 0
     ? `<tr><td colspan="${cols}">Nenhum utilizador registado. Preenche o formulário acima.</td></tr>`
     : dados.map(u => `
@@ -205,10 +237,9 @@ function renderTabela(dados, comFuncao = true) {
           <td>${u.id}</td>
           <td>${escapeHtml(u.nome)}</td>
           <td>${escapeHtml(u.email)}</td>
-          <td>${escapeHtml(u.role_nome || ROLE_NAMES[u.role_id] || '-')}</td>
-          <td>${(u.criado_em || '').slice(0, 16)}</td>
+          <td>${escapeHtml(u.ip || '-')}</td>
           <td>
-            <button type="button" class="btn-editar" data-id="${u.id}" data-nome="${escapeHtml(u.nome)}" data-email="${escapeHtml(u.email)}" data-role="${u.role_id || 4}">Editar</button>
+            <button type="button" class="btn-editar" data-id="${u.id}" data-nome="${escapeHtml(u.nome)}" data-email="${escapeHtml(u.email)}" data-ip="${escapeHtml(u.ip || '')}" data-role="${u.role_id || 4}">Editar</button>
             <button type="button" class="btn-apagar" data-id="${u.id}">Apagar</button>
           </td>
         </tr>
@@ -278,20 +309,28 @@ async function guardarUtilizador(payload) {
     }
   }
   const data = getUsuariosLocal();
-  const { id, nome, email, password, role_id } = payload;
+  const { id, nome, email, password, role_id, ip } = payload;
   const agora = new Date().toISOString().slice(0, 19).replace('T', ' ');
   if (id) {
-    const idx = data.usuarios.findIndex(u => String(u.id) === id);
+    const idx = data.usuarios.findIndex(u => String(u.id) === String(id));
     if (idx >= 0) {
-      data.usuarios[idx] = { ...data.usuarios[idx], nome, email, role_id: role_id || 4 };
+      data.usuarios[idx] = { ...data.usuarios[idx], nome, email, role_id: role_id || 4, ip: ip || data.usuarios[idx].ip };
       saveUsuariosLocal(data);
+    } else {
+      if (!data.usuarios.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+        data.usuarios.push({ id: data.nextId++, nome, email, role_id: role_id || 4, role_nome: ROLE_NAMES[role_id || 4] || 'Convidado', criado_em: agora, ip: ip || '' });
+        saveUsuariosLocal(data);
+      } else {
+        alert('Este email já está registado.');
+        return false;
+      }
     }
   } else {
     if (data.usuarios.some(u => u.email.toLowerCase() === email.toLowerCase())) {
       alert('Este email já está registado.');
       return false;
     }
-    data.usuarios.push({ id: data.nextId++, nome, email, role_id: role_id || 4, role_nome: ROLE_NAMES[role_id || 4] || 'Convidado', criado_em: agora });
+    data.usuarios.push({ id: data.nextId++, nome, email, role_id: role_id || 4, role_nome: ROLE_NAMES[role_id || 4] || 'Convidado', criado_em: agora, ip: ip || '' });
     saveUsuariosLocal(data);
   }
   carregarTabelaUtilizadores();
@@ -304,13 +343,30 @@ async function apagarUtilizador(id) {
     try {
       const r = await fetch(`${API_BASE}/api/usuarios/${id}`, { method: 'DELETE' });
       const json = await r.json();
-      if (json.ok) { await carregarTabelaUtilizadores(); return; }
-    } catch (e) {}
+      if (json.ok) {
+        await carregarTabelaUtilizadores();
+        mostrarMensagemCRUD('✓ Utilizador apagado com sucesso!', 'sucesso');
+        return;
+      }
+    } catch (e) {
+      mostrarMensagemCRUD('Erro ao apagar. Tenta novamente.', 'erro');
+      return;
+    }
   }
   const data = getUsuariosLocal();
   data.usuarios = data.usuarios.filter(u => u.id != id);
   saveUsuariosLocal(data);
   carregarTabelaUtilizadores();
+  mostrarMensagemCRUD('✓ Utilizador apagado com sucesso!', 'sucesso');
+}
+
+function mostrarMensagemCRUD(texto, tipo) {
+  const msgEl = document.getElementById('msgCadastro');
+  if (!msgEl) return;
+  msgEl.textContent = texto;
+  msgEl.className = 'msg-cadastro ' + (tipo === 'sucesso' ? 'msg-sucesso' : tipo === 'erro' ? 'msg-erro' : '');
+  msgEl.style.display = 'block';
+  setTimeout(() => { msgEl.textContent = ''; msgEl.className = 'msg-cadastro'; }, 3000);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -335,7 +391,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Password obrigatória para novo utilizador.');
         return;
       }
-      const payload = { nome, email, role_id };
+      const ip = await obterIPUtilizador();
+      const payload = { nome, email, role_id, ip };
       if (id) payload.id = id;
       if (password) payload.password = password;
       const ok = await guardarUtilizador(payload);
@@ -345,7 +402,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('userId').value = '';
         if (roleEl) roleEl.value = '4';
         document.getElementById('inputPassword').placeholder = 'Password (obrigatório ao registar)';
-        window.location.href = 'cadastro-sucesso.html';
+        if (msgEl) {
+          msgEl.textContent = id ? '✓ Utilizador atualizado com sucesso!' : '✓ Registo criado com sucesso!';
+          msgEl.className = 'msg-cadastro msg-sucesso';
+        }
+        carregarTabelaUtilizadores();
       } else {
         if (msgEl) {
           msgEl.textContent = '';

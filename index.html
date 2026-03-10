@@ -23,7 +23,7 @@
 
     <main class="main">
         <section class="capa" aria-label="Capa - Topologia da Rede LAN">
-            <img src="assets/images/capa.png" alt="Topologia da Rede LAN - Cisco Packet Tracer: servidores FTP, WEBB, EMAIL, DHCP, DNS, switches, Access Points ALUNOS, CONVIDADOS, PROFESSORES e dispositivos móveis" class="capa-imagem">
+            <img src="assets/images/capa.png" alt="Topologia da Rede LAN - Cisco Packet Tracer: servidores FTP, WEBB, EMAIL, DHCP, DNS, switches, Access Points ALUNOS, CONVIDADOS, PROFESSORES e dispositivos móveis" class="capa-imagem" title="Clique para ampliar">
         </section>
         <section class="intro">
             <h2>Sobre o Projeto</h2>
@@ -149,6 +149,30 @@
                 <div class="carrossel" id="cardsTopologia"></div>
                 <button class="carrossel-btn carrossel-next" aria-label="Seguinte">›</button>
             </div>
+
+            <h3 class="respostas-titulo">📋 Perguntas e Respostas — Configuração da Rede</h3>
+            <div class="respostas-grid">
+                <article class="card-resposta">
+                    <span class="card-resposta-num">1</span>
+                    <h4 class="card-resposta-pergunta">Qual é o endereço IP da rede local configurada no exercício?</h4>
+                    <p class="card-resposta-resposta"><strong>192.168.3.1</strong></p>
+                </article>
+                <article class="card-resposta">
+                    <span class="card-resposta-num">2</span>
+                    <h4 class="card-resposta-pergunta">Qual é a máscara de sub-rede utilizada na rede?</h4>
+                    <p class="card-resposta-resposta"><strong>255.255.255.0</strong></p>
+                </article>
+                <article class="card-resposta">
+                    <span class="card-resposta-num">3</span>
+                    <h4 class="card-resposta-pergunta">Qual é o gateway da rede?</h4>
+                    <p class="card-resposta-resposta"><strong>192.168.3.1</strong></p>
+                </article>
+                <article class="card-resposta">
+                    <span class="card-resposta-num">4</span>
+                    <h4 class="card-resposta-pergunta">Indique o número de endereços IP disponíveis para os computadores.</h4>
+                    <p class="card-resposta-resposta"><strong>254</strong></p>
+                </article>
+            </div>
         </section>
 
         <!-- SECÇÃO: CADASTRO DE UTILIZADORES (API SQLite + fallback localStorage) -->
@@ -181,6 +205,22 @@
                 </form>
                 <p class="cadastro-aviso">Onde ver os dados guardados? Acede a <a href="/admin" target="_blank"><strong>/admin</strong></a> (com o servidor a correr) para ver todos os utilizadores na base de dados.</p>
             </div>
+
+            <div class="tabela-utilizadores cadastro-banco">
+                <h3 class="tabela-titulo">📋 Base de Dados — Nome, Gmail, IP (CRUD)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Gmail</th>
+                            <th>IP</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyUtilizadores"></tbody>
+                </table>
+            </div>
         </section>
 
     </main>
@@ -192,6 +232,7 @@
             <div class="modal-info">
                 <h3 id="modalTitle"></h3>
                 <p id="modalDescription"></p>
+                <p id="modalPergunta" class="modal-pergunta"></p>
             </div>
         </div>
     </div>

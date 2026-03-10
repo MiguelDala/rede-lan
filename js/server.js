@@ -36,6 +36,7 @@ function initDB() {
   }
   try { db.exec('ALTER TABLE utilizadores ADD COLUMN role_id INTEGER DEFAULT 4'); } catch (e) {}
   try { db.exec('ALTER TABLE utilizadores ADD COLUMN ativo INTEGER DEFAULT 1'); } catch (e) {}
+  try { db.exec('ALTER TABLE utilizadores ADD COLUMN ip TEXT'); } catch (e) {}
   return db;
 }
 
@@ -82,14 +83,14 @@ app.get('/api/usuarios', (req, res) => {
 app.post('/api/usuarios', (req, res) => {
   try {
     const body = req.body || {};
-    const { nome, email, password, role_id } = body;
+    const { nome, email, password, role_id, ip } = body;
     if (!nome || !email || !password) {
       return res.status(400).json({ ok: false, erro: 'Nome, email e password são obrigatórios.' });
     }
     const hash = hashPassword(password);
     const rid = role_id ? parseInt(role_id, 10) : 4;
-    const stmt = db.prepare('INSERT INTO utilizadores (nome, email, password_hash, role_id) VALUES (?, ?, ?, ?)');
-    const info = stmt.run(nome.trim(), email.trim().toLowerCase(), hash, rid);
+    const stmt = db.prepare('INSERT INTO utilizadores (nome, email, password_hash, role_id, ip) VALUES (?, ?, ?, ?, ?)');
+    const info = stmt.run(nome.trim(), email.trim().toLowerCase(), hash, rid, (ip || '').trim() || null);
     res.status(201).json({ ok: true, id: info.lastInsertRowid });
   } catch (e) {
     if (e.message.includes('UNIQUE')) {
@@ -108,22 +109,24 @@ app.put('/api/usuarios/:id', (req, res) => {
       return res.status(400).json({ ok: false, erro: 'Nome e email são obrigatórios.' });
     }
     const rid = role_id ? parseInt(role_id, 10) : null;
+    const { ip } = body;
+    const ipVal = (ip || '').trim() || null;
     if (password && password.length > 0) {
       const hash = hashPassword(password);
       if (rid !== null) {
-        db.prepare('UPDATE utilizadores SET nome=?, email=?, password_hash=?, role_id=?, atualizado_em=CURRENT_TIMESTAMP WHERE id=?')
-          .run(nome.trim(), email.trim().toLowerCase(), hash, rid, id);
+        db.prepare('UPDATE utilizadores SET nome=?, email=?, password_hash=?, role_id=?, ip=?, atualizado_em=CURRENT_TIMESTAMP WHERE id=?')
+          .run(nome.trim(), email.trim().toLowerCase(), hash, rid, ipVal, id);
       } else {
-        db.prepare('UPDATE utilizadores SET nome=?, email=?, password_hash=?, atualizado_em=CURRENT_TIMESTAMP WHERE id=?')
-          .run(nome.trim(), email.trim().toLowerCase(), hash, id);
+        db.prepare('UPDATE utilizadores SET nome=?, email=?, password_hash=?, ip=?, atualizado_em=CURRENT_TIMESTAMP WHERE id=?')
+          .run(nome.trim(), email.trim().toLowerCase(), hash, ipVal, id);
       }
     } else {
       if (rid !== null) {
-        db.prepare('UPDATE utilizadores SET nome=?, email=?, role_id=?, atualizado_em=CURRENT_TIMESTAMP WHERE id=?')
-          .run(nome.trim(), email.trim().toLowerCase(), rid, id);
+        db.prepare('UPDATE utilizadores SET nome=?, email=?, role_id=?, ip=?, atualizado_em=CURRENT_TIMESTAMP WHERE id=?')
+          .run(nome.trim(), email.trim().toLowerCase(), rid, ipVal, id);
       } else {
-        db.prepare('UPDATE utilizadores SET nome=?, email=?, atualizado_em=CURRENT_TIMESTAMP WHERE id=?')
-          .run(nome.trim(), email.trim().toLowerCase(), id);
+        db.prepare('UPDATE utilizadores SET nome=?, email=?, ip=?, atualizado_em=CURRENT_TIMESTAMP WHERE id=?')
+          .run(nome.trim(), email.trim().toLowerCase(), ipVal, id);
       }
     }
     res.json({ ok: true });
@@ -153,7 +156,7 @@ app.get('/admin', (req, res) => {
   try {
     const escapeHtml = (s) => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     const rows = db.prepare(`
-      SELECT u.id, u.nome, u.email, u.role_id, u.ativo, u.criado_em, u.atualizado_em,
+      SELECT u.id, u.nome, u.email, u.ip, u.role_id, u.ativo, u.criado_em, u.atualizado_em,
              COALESCE(r.nome, 'Convidado') as role_nome
       FROM utilizadores u
       LEFT JOIN roles r ON u.role_id = r.id
@@ -172,8 +175,8 @@ a{color:#06b6d4}</style></head>
 <p><a href="/">← Voltar ao site</a></p>
 <h2>Formato tabela</h2>
 <table>
-<tr><th>ID</th><th>Nome</th><th>Email</th><th>Função</th><th>Ativo</th><th>Criado</th><th>Atualizado</th></tr>
-${rows.map(u => `<tr><td>${u.id}</td><td>${escapeHtml(u.nome)}</td><td>${escapeHtml(u.email)}</td><td>${u.role_nome}</td><td>${u.ativo}</td><td>${(u.criado_em||'').slice(0,19)}</td><td>${(u.atualizado_em||'').slice(0,19)}</td></tr>`).join('')}
+<tr><th>ID</th><th>Nome</th><th>Gmail</th><th>IP</th><th>Função</th><th>Ativo</th><th>Criado</th><th>Atualizado</th></tr>
+${rows.map(u => `<tr><td>${u.id}</td><td>${escapeHtml(u.nome)}</td><td>${escapeHtml(u.email)}</td><td>${escapeHtml(u.ip || '-')}</td><td>${u.role_nome}</td><td>${u.ativo}</td><td>${(u.criado_em||'').slice(0,19)}</td><td>${(u.atualizado_em||'').slice(0,19)}</td></tr>`).join('')}
 </table>
 <h2>Formato JSON (linguagem de máquina)</h2>
 <pre>${JSON.stringify(rows, null, 2)}</pre>
