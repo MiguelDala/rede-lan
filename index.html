@@ -16,30 +16,37 @@
             <h1 class="logo">Projeto de Rede LAN</h1>
             <p class="subtitle">Rede Local da Escola Fundão - Cisco Packet Tracer</p>
             <nav class="header-nav">
+                <a href="#servidores" class="nav-link">Servidores</a>
+                <a href="#wireless" class="nav-link">Wireless</a>
+                <a href="#topologia" class="nav-link">Topologia</a>
                 <a href="#cadastro" class="nav-link">Cadastro</a>
             </nav>
         </div>
     </header>
 
     <main class="main">
-        <section class="capa" aria-label="Capa - Topologia da Rede LAN">
+        <section class="capa capa-animada" aria-label="Capa - Topologia da Rede LAN">
+            <span class="capa-link-indicator"></span>
             <img src="assets/images/capa.png" alt="Topologia da Rede LAN - Cisco Packet Tracer: servidores FTP, WEBB, EMAIL, DHCP, DNS, switches, Access Points ALUNOS, CONVIDADOS, PROFESSORES e dispositivos móveis" class="capa-imagem" title="Clique para ampliar">
         </section>
-        <section class="intro">
+        <section class="intro intro-animada">
+            <div class="intro-rede-status">
+                <span class="status-dot"></span>
+                <span>Rede 192.168.3.0/24 — Activa</span>
+            </div>
             <h2>Sobre o Projeto</h2>
             <p>Este projeto apresenta uma rede LAN completa simulada no Cisco Packet Tracer, com <strong>5 servidores em funcionamento</strong> (DHCP, DNS, Web, FTP, Email) e <strong>ligações wireless</strong> aos dispositivos móveis.</p>
         </section>
 
         <!-- SECÇÃO: SERVIDORES EM FUNCIONAMENTO -->
-        <section class="seccao-servidores" id="servidores">
-            <h2 class="seccao-titulo">
+        <section class="seccao-servidores seccao-rede" id="servidores">
+            <h2 class="seccao-titulo seccao-titulo-animado">
                 <span class="icone">🖥️</span>
                 Servidores em Funcionamento
             </h2>
-            
-            <div class="servidores-grid">
+            <div class="servidores-grid servidores-rede">
                 <!-- DHCP -->
-                <div class="servidor-grupo" data-servidor="dhcp">
+                <div class="servidor-grupo servidor-nó" data-servidor="dhcp">
                     <h3 class="servidor-nome">
                         <span class="badge-funcionar">● A Funcionar</span>
                         DHCP
@@ -53,7 +60,7 @@
                 </div>
 
                 <!-- DNS -->
-                <div class="servidor-grupo" data-servidor="dns">
+                <div class="servidor-grupo servidor-nó" data-servidor="dns">
                     <h3 class="servidor-nome">
                         <span class="badge-funcionar">● A Funcionar</span>
                         DNS
@@ -81,7 +88,7 @@
                 </div>
 
                 <!-- Email -->
-                <div class="servidor-grupo" data-servidor="email">
+                <div class="servidor-grupo servidor-nó" data-servidor="email">
                     <h3 class="servidor-nome">
                         <span class="badge-funcionar">● A Funcionar</span>
                         Email
@@ -95,7 +102,7 @@
                 </div>
 
                 <!-- FTP -->
-                <div class="servidor-grupo" data-servidor="ftp">
+                <div class="servidor-grupo servidor-nó" data-servidor="ftp">
                     <h3 class="servidor-nome">
                         <span class="badge-funcionar">● A Funcionar</span>
                         FTP
@@ -109,7 +116,7 @@
                 </div>
 
                 <!-- Testes de Conectividade -->
-                <div class="servidor-grupo" data-servidor="conectividade">
+                <div class="servidor-grupo servidor-nó" data-servidor="conectividade">
                     <h3 class="servidor-nome">
                         <span class="badge-funcionar">● A Funcionar</span>
                         Testes de Conectividade
@@ -126,7 +133,7 @@
 
         <!-- SECÇÃO: LIGAÇÕES WIRELESS -->
         <section class="seccao-wireless" id="wireless">
-            <h2 class="seccao-titulo">
+            <h2 class="seccao-titulo seccao-titulo-animado">
                 <span class="icone">📶</span>
                 Ligações Wireless e Dispositivos
             </h2>
@@ -140,7 +147,7 @@
 
         <!-- SECÇÃO: TOPOLOGIA -->
         <section class="seccao-topologia" id="topologia">
-            <h2 class="seccao-titulo">
+            <h2 class="seccao-titulo seccao-titulo-animado">
                 <span class="icone">🔗</span>
                 Topologia da Rede
             </h2>
@@ -151,23 +158,23 @@
             </div>
 
             <h3 class="respostas-titulo">📋 Perguntas e Respostas — Configuração da Rede</h3>
-            <div class="respostas-grid">
-                <article class="card-resposta">
+            <div class="respostas-grid respostas-rede">
+                <article class="card-resposta card-nó">
                     <span class="card-resposta-num">1</span>
                     <h4 class="card-resposta-pergunta">Qual é o endereço IP da rede local configurada no exercício?</h4>
                     <p class="card-resposta-resposta"><strong>192.168.3.1</strong></p>
                 </article>
-                <article class="card-resposta">
+                <article class="card-resposta card-nó">
                     <span class="card-resposta-num">2</span>
                     <h4 class="card-resposta-pergunta">Qual é a máscara de sub-rede utilizada na rede?</h4>
                     <p class="card-resposta-resposta"><strong>255.255.255.0</strong></p>
                 </article>
-                <article class="card-resposta">
+                <article class="card-resposta card-nó">
                     <span class="card-resposta-num">3</span>
                     <h4 class="card-resposta-pergunta">Qual é o gateway da rede?</h4>
                     <p class="card-resposta-resposta"><strong>192.168.3.1</strong></p>
                 </article>
-                <article class="card-resposta">
+                <article class="card-resposta card-nó">
                     <span class="card-resposta-num">4</span>
                     <h4 class="card-resposta-pergunta">Indique o número de endereços IP disponíveis para os computadores.</h4>
                     <p class="card-resposta-resposta"><strong>254</strong></p>
@@ -177,7 +184,7 @@
 
         <!-- SECÇÃO: CADASTRO DE UTILIZADORES (API SQLite + fallback localStorage) -->
         <section class="seccao-cadastro" id="cadastro">
-            <h2 class="seccao-titulo">
+            <h2 class="seccao-titulo seccao-titulo-animado">
                 <span class="icone">👥</span>
                 Cadastro de Utilizadores
                 <span class="badge-db" id="badgeDb">...</span>
@@ -237,8 +244,18 @@
         </div>
     </div>
 
+    <button class="btn-scroll-top" id="btnScrollTop" aria-label="Voltar ao topo">↑</button>
+
     <footer class="footer">
         <p>Projeto de Rede LAN &copy; 2026 - Escola Fundão</p>
+        <div class="footer-logos-linha">
+            <div class="footer-escola">
+                <img src="assets/images/logos/escola-fundao-logo.png" alt="Escola Profissional do Fundão - Proximidade, Qualidade e Confiança" class="footer-img">
+            </div>
+            <div class="footer-cofinanciado">
+                <img src="assets/images/logos/cofinanciado.png" alt="Cofinanciado por Pessoas 2030, Portugal 2030 e União Europeia" class="footer-img">
+            </div>
+        </div>
     </footer>
 
     <script src="js/script.js"></script>

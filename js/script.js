@@ -98,19 +98,21 @@ class GaleriaRedeLAN {
       const container = document.getElementById(secaoIds[secao]);
       if (!container) return;
       const cards = cardsData.filter(c => c.secao === secao);
-      container.innerHTML = cards.map(card => this.criarCard(card)).join('');
+      container.innerHTML = cards.map((card, i) => this.criarCard(card, i)).join('');
     });
     this.registarCliquesCards();
   }
 
-  criarCard(card) {
+  criarCard(card, index = 0) {
     const badge = ['dhcp','dns','web','ftp','email'].includes(card.secao) 
       ? '<span class="badge-funcionar-card">● A Funcionar</span>' : '';
     const imgSrc = card.imagem;
     const perguntaHtml = card.pergunta 
       ? `<div class="card-pergunta"><strong>💡 Pergunta:</strong> ${card.pergunta}</div>` : '';
+    const animDelay = `style="animation-delay: ${index * 0.08}s"`;
     return `
-      <article class="card" data-categoria="${card.secao}">
+      <article class="card card-entrada" data-categoria="${card.secao}" ${animDelay}>
+        <span class="card-link-indicator"></span>
         ${badge}
         <img src="${imgSrc}" alt="${card.titulo}" class="card-imagem" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22150%22%3E%3Crect fill=%22%231e293b%22 width=%22200%22 height=%22150%22/%3E%3Ctext fill=%22%2394a3b8%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2214%22%3EImagem indisponível%3C/text%3E%3C/svg%3E'; this.onerror=null;">
         <div class="card-conteudo">
@@ -373,6 +375,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   new GaleriaRedeLAN();
   await verificarAPI();
   await carregarTabelaUtilizadores();
+
+  const btnScrollTop = document.getElementById('btnScrollTop');
+  if (btnScrollTop) {
+    window.addEventListener('scroll', () => {
+      btnScrollTop.classList.toggle('visivel', window.scrollY > 400);
+    });
+    btnScrollTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   const form = document.getElementById('formUtilizador');
   const btnCancelar = document.getElementById('btnCancelar');
