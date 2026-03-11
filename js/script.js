@@ -34,6 +34,7 @@ class GaleriaRedeLAN {
     this.configurarModal();
     this.configurarCarrossel();
     this.configurarCapa();
+    this.configurarIpImagem();
   }
 
   configurarCarrossel() {
@@ -143,6 +144,16 @@ class GaleriaRedeLAN {
       capaImg.style.cursor = 'pointer';
       capaImg.addEventListener('click', () => {
         this.abrirModal(capaImg.src, capaImg.alt, 'Topologia da Rede LAN', 'Vista ampliada da rede LAN no Cisco Packet Tracer.');
+      });
+    }
+  }
+
+  configurarIpImagem() {
+    const ipImg = document.querySelector('.ip-enderecos-img');
+    if (ipImg) {
+      ipImg.style.cursor = 'pointer';
+      ipImg.addEventListener('click', () => {
+        this.abrirModal(ipImg.src, ipImg.alt, 'Endereços IP da Rede LAN', 'Tabela com os 15 endereços IP configurados na rede (192.168.3.3 a 192.168.3.17).');
       });
     }
   }

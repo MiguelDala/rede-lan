@@ -647,6 +647,63 @@ main {
   letter-spacing: 0.05em;
 }
 
+/* ========== Bloco Endereços IP (foto + descrição) ========== */
+.ip-enderecos-bloco {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.7) 100%);
+  border-radius: 16px;
+  border: 1px solid var(--cor-card-border);
+  align-items: center;
+}
+
+.ip-enderecos-foto {
+  flex: 0 0 auto;
+  max-width: 320px;
+}
+
+.ip-enderecos-foto img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ip-enderecos-foto img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.25);
+}
+
+.ip-enderecos-desc {
+  flex: 1;
+  min-width: 250px;
+}
+
+.ip-enderecos-titulo {
+  font-size: 1.15rem;
+  color: var(--cor-texto);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.ip-enderecos-desc p {
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.ip-enderecos-lista {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--cor-acento);
+}
+
 .carrossel-grande .card {
   --card-width: min(480px, 85vw);
   --card-img-height: 320px;
@@ -1113,7 +1170,7 @@ footer {
 
 .footer-logos-linha {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1rem;
   width: 100%;
   max-width: 100%;
@@ -1128,13 +1185,19 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1 1 50%;
+  width: 50%;
   min-width: 0;
 }
 
-.footer-img {
+.footer-escola .footer-img,
+.footer-cofinanciado .footer-img {
   width: 100%;
+  max-width: 100%;
+  max-height: 100px;
   height: auto;
   object-fit: contain;
+  object-position: center;
   display: block;
 }
 
@@ -1162,6 +1225,14 @@ footer {
   .carrossel-grande .card {
     --card-width: min(320px, 94vw);
     --card-img-height: 200px;
+  }
+
+  .ip-enderecos-bloco {
+    flex-direction: column;
+  }
+
+  .ip-enderecos-foto {
+    max-width: 100%;
   }
 
   .btn-scroll-top {
